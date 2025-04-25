@@ -15,17 +15,17 @@ import {
 import { Input } from '@/components/ui/input'
 import { useState } from 'react'
 import { LoaderCircle } from 'lucide-react'
-import { login } from '../actions/login'
+import { login } from '../_actions/login'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
-import type { LoginResponse } from '../actions/login'
+import type { LoginResponse } from '../_actions/login'
 
 const formSchema = z.object({
   email: z.string().email({ message: 'Enter a valid email address.' }),
   password: z.string(),
 })
 
-export function ParentForm() {
+export function WardenForm() {
   const [loading, setLoading] = useState(false)
   const router = useRouter()
 
@@ -41,13 +41,13 @@ export function ParentForm() {
     setLoading(true)
 
     const result: LoginResponse = await login({
-      collection: 'parents',
+      collection: 'wardens',
       ...values,
     })
 
     if (result.success) {
       toast.success('Logged in Succesfully')
-      router.push('/dashboard')
+      router.push('/warden/dashboard')
     } else {
       toast.error(result.error || 'An error occurred')
     }
@@ -63,9 +63,9 @@ export function ParentForm() {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Parent Email</FormLabel>
+              <FormLabel>Warden Email</FormLabel>
               <FormControl>
-                <Input placeholder="Parent Email" {...field} />
+                <Input placeholder="Warden Email" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

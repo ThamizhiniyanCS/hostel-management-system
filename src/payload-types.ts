@@ -66,6 +66,7 @@ export interface Config {
     users: UserAuthOperations;
     students: StudentAuthOperations;
     parents: ParentAuthOperations;
+    wardens: WardenAuthOperations;
   };
   blocks: {};
   collections: {
@@ -73,6 +74,9 @@ export interface Config {
     media: Media;
     students: Student;
     parents: Parent;
+    hostels: Hostel;
+    wardens: Warden;
+    leave_requests: LeaveRequest;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -83,6 +87,9 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     students: StudentsSelect<false> | StudentsSelect<true>;
     parents: ParentsSelect<false> | ParentsSelect<true>;
+    hostels: HostelsSelect<false> | HostelsSelect<true>;
+    wardens: WardensSelect<false> | WardensSelect<true>;
+    leave_requests: LeaveRequestsSelect<false> | LeaveRequestsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -102,6 +109,9 @@ export interface Config {
       })
     | (Parent & {
         collection: 'parents';
+      })
+    | (Warden & {
+        collection: 'wardens';
       });
   jobs: {
     tasks: unknown;
@@ -162,6 +172,24 @@ export interface ParentAuthOperations {
     password: string;
   };
 }
+export interface WardenAuthOperations {
+  forgotPassword: {
+    email: string;
+    password: string;
+  };
+  login: {
+    email: string;
+    password: string;
+  };
+  registerFirstUser: {
+    email: string;
+    password: string;
+  };
+  unlock: {
+    email: string;
+    password: string;
+  };
+}
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
@@ -204,6 +232,30 @@ export interface Media {
  */
 export interface Student {
   id: string;
+  photo: string | Media;
+  name: string;
+  general_details: {
+    register_number: string;
+    program: string;
+    batch: number;
+    semester: number;
+  };
+  personal_details: {
+    dob: string;
+    gender: 'Male' | 'Female' | 'Prefer not to say';
+    blood_group: 'A+' | 'A-' | 'B+' | 'B-' | 'O+' | 'O-' | 'AB+' | 'AB-';
+  };
+  parent_details?: (string | null) | Parent;
+  contact_details: {
+    address: string;
+    pincode: number;
+    mobile_number: string;
+  };
+  hostel_details: {
+    hostel: string | Hostel;
+    warden: string | Warden;
+    room_number: number;
+  };
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -221,6 +273,11 @@ export interface Student {
  */
 export interface Parent {
   id: string;
+  photo: string | Media;
+  name: string;
+  relationship: 'Father' | 'Mother' | 'Guardian';
+  mobile_number: string;
+  student?: (string | null) | Student;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -231,6 +288,53 @@ export interface Parent {
   loginAttempts?: number | null;
   lockUntil?: string | null;
   password?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "hostels".
+ */
+export interface Hostel {
+  id: string;
+  name: string;
+  warden: string | Warden;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "wardens".
+ */
+export interface Warden {
+  id: string;
+  photo: string | Media;
+  name: string;
+  hostel?: (string | null) | Hostel;
+  mobile_number: string;
+  updatedAt: string;
+  createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  password?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "leave_requests".
+ */
+export interface LeaveRequest {
+  id: string;
+  student: string | Student;
+  parent: string | Parent;
+  warden: string | Warden;
+  status?: ('Pending' | 'Approved' | 'Rejected') | null;
+  subject: string;
+  message: string;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -254,6 +358,18 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'parents';
         value: string | Parent;
+      } | null)
+    | ({
+        relationTo: 'hostels';
+        value: string | Hostel;
+      } | null)
+    | ({
+        relationTo: 'wardens';
+        value: string | Warden;
+      } | null)
+    | ({
+        relationTo: 'leave_requests';
+        value: string | LeaveRequest;
       } | null);
   globalSlug?: string | null;
   user:
@@ -268,6 +384,10 @@ export interface PayloadLockedDocument {
     | {
         relationTo: 'parents';
         value: string | Parent;
+      }
+    | {
+        relationTo: 'wardens';
+        value: string | Warden;
       };
   updatedAt: string;
   createdAt: string;
@@ -290,6 +410,10 @@ export interface PayloadPreference {
     | {
         relationTo: 'parents';
         value: string | Parent;
+      }
+    | {
+        relationTo: 'wardens';
+        value: string | Warden;
       };
   key?: string | null;
   value?:
@@ -353,6 +477,38 @@ export interface MediaSelect<T extends boolean = true> {
  * via the `definition` "students_select".
  */
 export interface StudentsSelect<T extends boolean = true> {
+  photo?: T;
+  name?: T;
+  general_details?:
+    | T
+    | {
+        register_number?: T;
+        program?: T;
+        batch?: T;
+        semester?: T;
+      };
+  personal_details?:
+    | T
+    | {
+        dob?: T;
+        gender?: T;
+        blood_group?: T;
+      };
+  parent_details?: T;
+  contact_details?:
+    | T
+    | {
+        address?: T;
+        pincode?: T;
+        mobile_number?: T;
+      };
+  hostel_details?:
+    | T
+    | {
+        hostel?: T;
+        warden?: T;
+        room_number?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -368,6 +524,11 @@ export interface StudentsSelect<T extends boolean = true> {
  * via the `definition` "parents_select".
  */
 export interface ParentsSelect<T extends boolean = true> {
+  photo?: T;
+  name?: T;
+  relationship?: T;
+  mobile_number?: T;
+  student?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -377,6 +538,49 @@ export interface ParentsSelect<T extends boolean = true> {
   hash?: T;
   loginAttempts?: T;
   lockUntil?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "hostels_select".
+ */
+export interface HostelsSelect<T extends boolean = true> {
+  name?: T;
+  warden?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "wardens_select".
+ */
+export interface WardensSelect<T extends boolean = true> {
+  photo?: T;
+  name?: T;
+  hostel?: T;
+  mobile_number?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  email?: T;
+  resetPasswordToken?: T;
+  resetPasswordExpiration?: T;
+  salt?: T;
+  hash?: T;
+  loginAttempts?: T;
+  lockUntil?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "leave_requests_select".
+ */
+export interface LeaveRequestsSelect<T extends boolean = true> {
+  student?: T;
+  parent?: T;
+  warden?: T;
+  status?: T;
+  subject?: T;
+  message?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

@@ -3,10 +3,10 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import { cookies } from 'next/headers'
-import { Student, Parent } from '@/payload-types'
+import { Student, Parent, Warden } from '@/payload-types'
 
 interface LoginParams {
-  collection: 'students' | 'parents'
+  collection: 'students' | 'parents' | 'wardens'
   email: string
   password: string
 }
@@ -19,7 +19,7 @@ export interface LoginResponse {
 export type Result = {
   exp?: number
   token?: string
-  user?: Student | Parent
+  user?: Student | Parent | Warden
 }
 
 export async function login({ collection, email, password }: LoginParams): Promise<LoginResponse> {
@@ -35,12 +35,6 @@ export async function login({ collection, email, password }: LoginParams): Promi
       const cookieStore = await cookies()
 
       cookieStore.set('payload-token', result.token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        path: '/',
-      })
-
-      cookieStore.set('payload-collection', collection, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         path: '/',

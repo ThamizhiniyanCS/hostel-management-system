@@ -12,8 +12,8 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
 
   return (
     <html lang="en">
-      <body className="antialiased min-h-screen grid grid-rows-[auto_1fr_auto] scroll-smooth">
-        <main className="w-full flex flex-col items-center">{children}</main>
+      <body className="antialiased min-h-screen grid grid-rows-[auto_1fr_auto] scroll-smooth dark">
+        {children}
         <Toaster />
       </body>
     </html>

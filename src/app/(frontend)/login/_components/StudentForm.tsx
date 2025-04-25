@@ -15,10 +15,10 @@ import {
 import { Input } from '@/components/ui/input'
 import { useState } from 'react'
 import { LoaderCircle } from 'lucide-react'
-import { login } from '../actions/login'
+import { login } from '../_actions/login'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
-import type { LoginResponse } from '../actions/login'
+import type { LoginResponse } from '../_actions/login'
 
 const formSchema = z.object({
   email: z.string().email({ message: 'Enter a valid email address.' }),
@@ -47,7 +47,7 @@ export function StudentForm() {
 
     if (result.success) {
       toast.success('Logged in Succesfully')
-      router.push('/dashboard')
+      router.push('/student/dashboard')
     } else {
       toast.error(result.error || 'An error occurred')
     }

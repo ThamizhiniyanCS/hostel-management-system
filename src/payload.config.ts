@@ -11,6 +11,9 @@ import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Students } from './collections/Students'
 import { Parents } from './collections/Parents'
+import { Hostels } from './collections/Hostels'
+import { Wardens } from './collections/Wardens'
+import { LeaveRequests } from './collections/LeaveRequests'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -22,7 +25,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Students, Parents],
+  collections: [Users, Media, Students, Parents, Hostels, Wardens, LeaveRequests],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
