@@ -1,9 +1,10 @@
 import React from 'react'
 import './styles.css'
+import { Toaster } from '@/components/ui/sonner'
 
 export const metadata = {
-  description: 'A blank template using Payload in a Next.js app.',
-  title: 'Payload Blank Template',
+  description: "St Peter's College of Engineering Hostel Management App",
+  title: "HMS | St Peter's",
 }
 
 export default async function RootLayout(props: { children: React.ReactNode }) {
@@ -11,8 +12,9 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
 
   return (
     <html lang="en">
-      <body>
-        <main>{children}</main>
+      <body className="antialiased min-h-screen grid grid-rows-[auto_1fr_auto] scroll-smooth">
+        <main className="w-full flex flex-col items-center">{children}</main>
+        <Toaster />
       </body>
     </html>
   )
