@@ -330,7 +330,11 @@ export interface LeaveRequest {
   student: string | Student;
   parent: string | Parent;
   warden: string | Warden;
-  status?: ('Pending' | 'Approved' | 'Rejected') | null;
+  status: 'Pending' | 'Approved' | 'Rejected';
+  number_of_days: number;
+  date?: string | null;
+  from_date?: string | null;
+  to_date?: string | null;
   subject: string;
   message: string;
   updatedAt: string;
@@ -577,6 +581,10 @@ export interface LeaveRequestsSelect<T extends boolean = true> {
   parent?: T;
   warden?: T;
   status?: T;
+  number_of_days?: T;
+  date?: T;
+  from_date?: T;
+  to_date?: T;
   subject?: T;
   message?: T;
   updatedAt?: T;

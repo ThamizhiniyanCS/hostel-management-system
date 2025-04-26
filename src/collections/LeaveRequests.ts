@@ -1,7 +1,15 @@
 import type { CollectionConfig } from 'payload'
+import { isParent } from '@/access/isParent'
+import isUserOrIsParent from '@/access/isUserOrIsParent'
+import isUserOrIsParentOrIsWarden from '@/access/isUserOrIsParentOrIsWarden'
 
 export const LeaveRequests: CollectionConfig = {
   slug: 'leave_requests',
+  access: {
+    create: isUserOrIsParent,
+    update: isUserOrIsParentOrIsWarden,
+    delete: isUserOrIsParent,
+  },
   labels: {
     singular: 'Leave Request',
     plural: 'Leave Requests',
@@ -36,6 +44,28 @@ export const LeaveRequests: CollectionConfig = {
       label: 'Status',
       type: 'select',
       options: ['Pending', 'Approved', 'Rejected'],
+      required: true,
+    },
+    {
+      name: 'number_of_days',
+      label: 'Number of Days',
+      type: 'number',
+      required: true,
+    },
+    {
+      name: 'date',
+      label: 'Date of Leave',
+      type: 'date',
+    },
+    {
+      name: 'from_date',
+      label: 'From Date',
+      type: 'date',
+    },
+    {
+      name: 'to_date',
+      label: 'To Date',
+      type: 'date',
     },
     {
       name: 'subject',
