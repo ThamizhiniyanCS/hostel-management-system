@@ -14,23 +14,23 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import LogoutButton from '../../_components/LogoutButton'
 import { getUser, TypeUser } from '../../_actions/getUser'
-import { Media, Student } from '@/payload-types'
+import { Media, Parent, Student } from '@/payload-types'
 
 // Menu items.
 const items = [
   {
     title: 'Dashboard',
-    url: '/student/dashboard',
+    url: '/parent/dashboard',
     icon: LayoutDashboardIcon,
   },
   {
     title: 'Leave Requests',
-    url: '/student/leave-requests',
+    url: '/parent/leave-requests',
     icon: ListTodoIcon,
   },
   {
-    title: 'Student Profile',
-    url: '/student/profile',
+    title: 'Parent Profile',
+    url: '/parent/profile',
     icon: FileUserIcon,
   },
 ]
@@ -38,15 +38,15 @@ const items = [
 export async function AppSidebar() {
   const user: TypeUser = await getUser()
 
-  const student = user?.collection === 'students' ? (user as Student) : undefined
+  const parent = user?.collection === 'parents' ? (user as Parent) : undefined
 
-  const photo = typeof student?.photo === 'object' ? (student.photo as Media) : undefined
+  const photo = typeof parent?.photo === 'object' ? (parent.photo as Media) : undefined
 
   return (
     <Sidebar variant="sidebar">
       <SidebarHeader className="p-4">
         <p className="font-normal">Hostel Management System</p>
-        <p className="font-bold text-lg">Students Portal</p>
+        <p className="font-bold text-lg">Parents Portal</p>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
@@ -75,8 +75,8 @@ export async function AppSidebar() {
               alt={photo?.alt ?? '@shadcn'}
             />
             <AvatarFallback>
-              {student?.name
-                ? student?.name
+              {parent?.name
+                ? parent?.name
                     .split(' ')
                     .map((word) => word[0])
                     .join('')
@@ -85,8 +85,8 @@ export async function AppSidebar() {
             </AvatarFallback>
           </Avatar>
           <div className="flex flex-col">
-            <p className="">{student?.name}</p>
-            <p className="">{student?.email}</p>
+            <p className="">{parent?.name}</p>
+            <p className="">{parent?.email}</p>
           </div>
         </div>
         <LogoutButton />

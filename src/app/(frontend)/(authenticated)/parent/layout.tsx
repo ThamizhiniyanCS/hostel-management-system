@@ -1,5 +1,5 @@
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
-import { AppSidebar } from '@/app/(frontend)/(authenticated)/student/_components/app-sidebar'
+import { AppSidebar } from '@/app/(frontend)/(authenticated)/parent/_components/app-sidebar'
 import HeaderBreadcrumbs from '@/components/HeaderBreadcrumbs'
 
 export default async function Layout({ children }: { children: React.ReactNode }) {

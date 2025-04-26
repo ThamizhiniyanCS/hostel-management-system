@@ -46,6 +46,6 @@ export async function login({ collection, email, password }: LoginParams): Promi
     }
   } catch (error) {
     console.log(`[-] Login Error: ${error}`)
-    return { success: false, error: 'An error occurred!' }
+    return { success: false, error: 'Invalid email or password' }
   }
 }
