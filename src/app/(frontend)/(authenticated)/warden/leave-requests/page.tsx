@@ -1,5 +1,4 @@
 import getLeaveRequests, { getLeaveRequestsResponse } from '../_actions/get-leave-requests'
-import LeaveRequestDrawer from '../_components/leave-request-drawer'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import LeaveRequestsTable from '../_components/leave-requests-table'
 

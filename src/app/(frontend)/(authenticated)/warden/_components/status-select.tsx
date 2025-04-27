@@ -20,10 +20,12 @@ import updateLeaveRequestAction, {
   updateLeaveRequestResponse,
 } from '../_actions/update-leave-request'
 import { cn } from '@/lib/utils'
+import { useRouter } from 'next/navigation'
 
 const StatusSelect = ({ status, id }: { status: TypeStatus; id: string }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [currentStatus, setCurrentStatus] = useState(status)
+  const router = useRouter()
 
   async function handleValueChange(value: TypeStatus) {
     setIsLoading(true)
@@ -35,6 +37,7 @@ const StatusSelect = ({ status, id }: { status: TypeStatus; id: string }) => {
         setIsLoading(false)
         setCurrentStatus(value)
         toast.success('Status Updated Successfully')
+        router.push('/warden/leave-requests')
       } else {
         toast.error(result.error || 'Failed to update status')
       }

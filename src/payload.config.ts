@@ -14,6 +14,7 @@ import { Parents } from './collections/Parents'
 import { Hostels } from './collections/Hostels'
 import { Wardens } from './collections/Wardens'
 import { LeaveRequests } from './collections/LeaveRequests'
+import { Attendance } from './collections/Attendance'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -25,7 +26,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Students, Parents, Hostels, Wardens, LeaveRequests],
+  collections: [Users, Media, Students, Parents, Hostels, Wardens, LeaveRequests, Attendance],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

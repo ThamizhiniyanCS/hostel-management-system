@@ -9,7 +9,7 @@ const LeaveRequests = async () => {
   return (
     <div className="w-full">
       <Tabs defaultValue="all" className="w-full">
-        <div className="w-full flex justify-between">
+        <div className="w-full flex items-center justify-between">
           <TabsList>
             <TabsTrigger value="all">All</TabsTrigger>
             <TabsTrigger value="approved">Approved</TabsTrigger>

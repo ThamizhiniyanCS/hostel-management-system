@@ -77,6 +77,7 @@ export interface Config {
     hostels: Hostel;
     wardens: Warden;
     leave_requests: LeaveRequest;
+    attendance: Attendance;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -90,6 +91,7 @@ export interface Config {
     hostels: HostelsSelect<false> | HostelsSelect<true>;
     wardens: WardensSelect<false> | WardensSelect<true>;
     leave_requests: LeaveRequestsSelect<false> | LeaveRequestsSelect<true>;
+    attendance: AttendanceSelect<false> | AttendanceSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -342,6 +344,18 @@ export interface LeaveRequest {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "attendance".
+ */
+export interface Attendance {
+  id: string;
+  student: string | Student;
+  date: string;
+  status: 'Present' | 'Absent' | 'Late';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -374,6 +388,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'leave_requests';
         value: string | LeaveRequest;
+      } | null)
+    | ({
+        relationTo: 'attendance';
+        value: string | Attendance;
       } | null);
   globalSlug?: string | null;
   user:
@@ -587,6 +605,17 @@ export interface LeaveRequestsSelect<T extends boolean = true> {
   to_date?: T;
   subject?: T;
   message?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "attendance_select".
+ */
+export interface AttendanceSelect<T extends boolean = true> {
+  student?: T;
+  date?: T;
+  status?: T;
   updatedAt?: T;
   createdAt?: T;
 }

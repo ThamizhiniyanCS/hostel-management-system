@@ -24,6 +24,11 @@ const items = [
     icon: LayoutDashboardIcon,
   },
   {
+    title: 'Attendance',
+    url: '/warden/attendance',
+    icon: ListTodoIcon,
+  },
+  {
     title: 'Leave Requests',
     url: '/warden/leave-requests',
     icon: ListTodoIcon,

@@ -1,18 +1,23 @@
 import {
   Drawer,
   DrawerContent,
-  DrawerDescription,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
 } from '@/components/ui/drawer'
 import { Button } from '@/components/ui/button'
 import { ReceiptTextIcon } from 'lucide-react'
-import { Student, Parent, Media, LeaveRequest } from '@/payload-types'
+import { Student, Parent, LeaveRequest, Hostel, Warden } from '@/payload-types'
 import StatusSelect from './status-select'
 
 const LeaveRequestDrawer = ({ data }: { data: LeaveRequest }) => {
   const student = data.student ? (data.student as Student) : undefined
+  const hostel = student?.hostel_details.hostel
+    ? (student?.hostel_details.hostel as Hostel)
+    : undefined
+  const warden = student?.hostel_details.warden
+    ? (student?.hostel_details.warden as Warden)
+    : undefined
   const parent = data.parent ? (data.parent as Parent) : undefined
 
   return (
@@ -79,7 +84,7 @@ const LeaveRequestDrawer = ({ data }: { data: LeaveRequest }) => {
           <div className="grid grid-cols-3 gap-6 p-4">
             <div className="flex flex-col gap-2 min-w-60">
               <p className="text-sm">Hostel Name</p>
-              <p className="text-normal font-bold">{student?.hostel_details.hostel.name}</p>
+              <p className="text-normal font-bold">{hostel?.name}</p>
             </div>
             <div className="flex flex-col gap-2 min-w-60">
               <p className="text-sm">Room Number</p>
@@ -87,7 +92,7 @@ const LeaveRequestDrawer = ({ data }: { data: LeaveRequest }) => {
             </div>
             <div className="flex flex-col gap-2 min-w-60">
               <p className="text-sm">Warden Name</p>
-              <p className="text-normal font-bold">{student?.hostel_details.warden.name}</p>
+              <p className="text-normal font-bold">{warden?.name}</p>
             </div>
           </div>
 
@@ -99,6 +104,33 @@ const LeaveRequestDrawer = ({ data }: { data: LeaveRequest }) => {
           <div className="w-full flex flex-col gap-2 min-w-60 p-4">
             <p className="text-sm">Message</p>
             <p className="text-normal font-bold">{data.message}</p>
+          </div>
+
+          <div className="grid grid-cols-4 gap-6 p-4">
+            <div className="flex flex-col gap-2 min-w-60">
+              <p className="text-sm">Created Date</p>
+              <p className="text-normal font-bold">
+                {data.createdAt ? new Date(data.createdAt).toLocaleDateString() : '-'}
+              </p>
+            </div>
+            <div className="flex flex-col gap-2 min-w-60">
+              <p className="text-sm">Created Time</p>
+              <p className="text-normal font-bold">
+                {data.createdAt ? new Date(data.createdAt).toLocaleTimeString() : '-'}
+              </p>
+            </div>
+            <div className="flex flex-col gap-2 min-w-60">
+              <p className="text-sm">Updated Date</p>
+              <p className="text-normal font-bold">
+                {data.createdAt ? new Date(data.updatedAt).toLocaleDateString() : '-'}
+              </p>
+            </div>
+            <div className="flex flex-col gap-2 min-w-60">
+              <p className="text-sm">Updated Time</p>
+              <p className="text-normal font-bold">
+                {data.createdAt ? new Date(data.updatedAt).toLocaleTimeString() : '-'}
+              </p>
+            </div>
           </div>
         </div>
       </DrawerContent>
