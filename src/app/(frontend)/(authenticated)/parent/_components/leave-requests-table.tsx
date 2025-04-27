@@ -7,21 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { Button } from '@/components/ui/button'
-import {
-  ReceiptTextIcon,
-  CircleCheckIcon,
-  CircleDotDashedIcon,
-  CircleAlertIcon,
-} from 'lucide-react'
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/components/ui/sheet'
+import { CircleCheckIcon, CircleDotDashedIcon, CircleAlertIcon } from 'lucide-react'
 import { LeaveRequest } from '@/payload-types'
 import LeaveRequestDetailsDrawer from './leave-request-details-drawer'
 
