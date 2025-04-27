@@ -12,7 +12,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
 
   return (
     <html lang="en">
-      <body className="antialiased min-h-screen grid grid-rows-[auto_1fr_auto] scroll-smooth dark">
+      <body className="antialiased min-h-screen grid grid-rows-[auto_1fr_auto] scroll-smooth">
         {children}
         <Toaster />
       </body>
