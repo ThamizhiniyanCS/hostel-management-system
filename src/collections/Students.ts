@@ -1,4 +1,3 @@
-import { group } from 'console'
 import type { CollectionConfig } from 'payload'
 
 export const Students: CollectionConfig = {

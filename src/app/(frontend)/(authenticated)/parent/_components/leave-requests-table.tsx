@@ -23,6 +23,7 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet'
 import { LeaveRequest } from '@/payload-types'
+import LeaveRequestDetailsDrawer from './leave-request-details-drawer'
 
 const LeaveRequestsTable = ({ data }: { data: LeaveRequest[] }) => {
   return (
@@ -55,22 +56,7 @@ const LeaveRequestsTable = ({ data }: { data: LeaveRequest[] }) => {
                 </p>
               </TableCell>
               <TableCell className="">
-                <Sheet>
-                  <SheetTrigger asChild>
-                    <Button variant="outline" size="icon" className="cursor-pointer">
-                      <ReceiptTextIcon />
-                    </Button>
-                  </SheetTrigger>
-                  <SheetContent>
-                    <SheetHeader>
-                      <SheetTitle>Are you absolutely sure?</SheetTitle>
-                      <SheetDescription>
-                        This action cannot be undone. This will permanently delete your account and
-                        remove your data from our servers.
-                      </SheetDescription>
-                    </SheetHeader>
-                  </SheetContent>
-                </Sheet>
+                <LeaveRequestDetailsDrawer data={request} />
               </TableCell>
             </TableRow>
           ))}

@@ -12,18 +12,25 @@ export interface TypeAttendance {
   attendance: { id: string; status: AttendanceStatusType | undefined }
 }
 
-const AttendancePage = async () => {
-  let date = new Date(new Date().setHours(0, 0, 0, 0))
+const AttendancePage = async ({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) => {
+  const { date } = await searchParams
+
+  const DATE = new Date(typeof date === 'string' ? date : Date.now())
+  DATE.setHours(0, 0, 0, 0)
 
   const students: Student[] = await getStudents()
 
-  let unmarked: TypeAttendance[] = []
-  let present: TypeAttendance[] = []
-  let late: TypeAttendance[] = []
-  let absent: TypeAttendance[] = []
+  const unmarked: TypeAttendance[] = []
+  const present: TypeAttendance[] = []
+  const late: TypeAttendance[] = []
+  const absent: TypeAttendance[] = []
 
   for (const student of students) {
-    const attendance = await getAttendancesByDateAndStudent(date, student.id)
+    const attendance = await getAttendancesByDateAndStudent(DATE, student.id)
 
     if (attendance) {
       switch (attendance.status) {
@@ -90,7 +97,7 @@ const AttendancePage = async () => {
     <div className="w-full">
       <Tabs defaultValue="unmarked" className="w-full">
         <div className="w-full items-center flex gap-5">
-          <AttendanceDatePickerWithPresets defaultDate={date} />
+          <AttendanceDatePickerWithPresets defaultDate={DATE} />
 
           <TabsList>
             <TabsTrigger value="unmarked">Unmarked</TabsTrigger>
@@ -101,16 +108,16 @@ const AttendancePage = async () => {
         </div>
 
         <TabsContent value="unmarked">
-          <AttendanceTable data={unmarked} date={date} />
+          <AttendanceTable data={unmarked} date={DATE} />
         </TabsContent>
         <TabsContent value="present">
-          <AttendanceTable data={present} date={date} />
+          <AttendanceTable data={present} date={DATE} />
         </TabsContent>
         <TabsContent value="late">
-          <AttendanceTable data={late} date={date} />
+          <AttendanceTable data={late} date={DATE} />
         </TabsContent>
         <TabsContent value="absent">
-          <AttendanceTable data={absent} date={date} />
+          <AttendanceTable data={absent} date={DATE} />
         </TabsContent>
       </Tabs>
     </div>

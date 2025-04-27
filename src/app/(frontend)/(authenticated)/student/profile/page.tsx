@@ -210,7 +210,7 @@ const StudentProfile = async () => {
               </div>
               <div className="flex flex-col gap-2 min-w-40">
                 <p className="text-sm">Relationship</p>
-                <p className="text-normal font-bold">{parent?.email}</p>
+                <p className="text-normal font-bold">{parent?.relationship}</p>
               </div>
             </div>
 

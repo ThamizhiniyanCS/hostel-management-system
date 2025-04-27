@@ -1,5 +1,4 @@
 import type { CollectionConfig } from 'payload'
-import { isParent } from '@/access/isParent'
 import isUserOrIsParent from '@/access/isUserOrIsParent'
 import isUserOrIsParentOrIsWarden from '@/access/isUserOrIsParentOrIsWarden'
 

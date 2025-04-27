@@ -1,12 +1,12 @@
 import { getUser, TypeUser } from '../../_actions/getUser'
-import { Media, Student } from '@/payload-types'
+import { Student } from '@/payload-types'
 
 const StudentDashboard = async () => {
   const user: TypeUser = await getUser()
 
   const student = user?.collection === 'students' ? (user as Student) : undefined
 
-  const photo = typeof student?.photo === 'object' ? (student.photo as Media) : undefined
+  // const photo = typeof student?.photo === 'object' ? (student.photo as Media) : undefined
 
   return (
     <div>

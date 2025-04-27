@@ -15,9 +15,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { useRouter } from 'next/navigation'
 
 export default function AttendanceDatePickerWithPresets({ defaultDate }: { defaultDate: Date }) {
   const [date, setDate] = React.useState<Date | undefined>(defaultDate)
+  const router = useRouter()
+
+  function onChangeHandler(value: Date | undefined) {
+    setDate(value)
+    router.push(`/warden/attendance?date=${value}`)
+  }
 
   return (
     <Popover>
@@ -34,7 +41,7 @@ export default function AttendanceDatePickerWithPresets({ defaultDate }: { defau
         </Button>
       </PopoverTrigger>
       <PopoverContent align="start" className="flex w-auto flex-col space-y-2 p-2">
-        <Select onValueChange={(value) => setDate(addDays(new Date(), parseInt(value)))}>
+        <Select onValueChange={(value) => onChangeHandler(addDays(new Date(), parseInt(value)))}>
           <SelectTrigger className="w-full">
             <SelectValue placeholder="Select" />
           </SelectTrigger>
@@ -47,7 +54,7 @@ export default function AttendanceDatePickerWithPresets({ defaultDate }: { defau
           <Calendar
             mode="single"
             selected={date}
-            onSelect={setDate}
+            onSelect={onChangeHandler}
             disabled={(date) => date > new Date() || date < new Date('1900-01-01')}
           />
         </div>

@@ -5,7 +5,7 @@ import config from '@payload-config'
 import { z } from 'zod'
 import { createLeaveRequestFormSchema } from '../_lib/zod'
 import { getUser, TypeUser } from '../../_actions/getUser'
-import { Media, Parent, Student, Warden } from '@/payload-types'
+import { Parent, Student, Warden } from '@/payload-types'
 
 export interface createLeaveRequestResponse {
   success: boolean

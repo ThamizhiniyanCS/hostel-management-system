@@ -15,10 +15,6 @@ import {
   LoaderCircleIcon,
 } from 'lucide-react'
 import { useState } from 'react'
-import { TypeStatus } from '../_actions/update-leave-request'
-import updateLeaveRequestAction, {
-  updateLeaveRequestResponse,
-} from '../_actions/update-leave-request'
 import { cn } from '@/lib/utils'
 import { useRouter } from 'next/navigation'
 import { AttendanceStatusType } from '../attendance/page'

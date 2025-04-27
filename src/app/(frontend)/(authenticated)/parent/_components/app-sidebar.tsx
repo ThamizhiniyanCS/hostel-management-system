@@ -14,7 +14,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import LogoutButton from '../../_components/LogoutButton'
 import { getUser, TypeUser } from '../../_actions/getUser'
-import { Media, Parent, Student } from '@/payload-types'
+import { Media, Parent } from '@/payload-types'
 
 // Menu items.
 const items = [
@@ -22,6 +22,11 @@ const items = [
     title: 'Dashboard',
     url: '/parent/dashboard',
     icon: LayoutDashboardIcon,
+  },
+  {
+    title: 'Student Attendance',
+    url: '/parent/student-attendance',
+    icon: ListTodoIcon,
   },
   {
     title: 'Leave Requests',
