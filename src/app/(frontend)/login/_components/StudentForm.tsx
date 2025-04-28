@@ -47,7 +47,7 @@ export function StudentForm() {
 
     if (result.success) {
       toast.success('Logged in Succesfully')
-      router.push('/student/dashboard')
+      router.push('/student/attendance')
     } else {
       toast.error(result.error || 'An error occurred')
     }

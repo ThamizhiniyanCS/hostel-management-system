@@ -47,7 +47,7 @@ export function WardenForm() {
 
     if (result.success) {
       toast.success('Logged in Succesfully')
-      router.push('/warden/dashboard')
+      router.push('/warden/attendance')
     } else {
       toast.error(result.error || 'An error occurred')
     }

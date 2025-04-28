@@ -47,7 +47,7 @@ export function ParentForm() {
 
     if (result.success) {
       toast.success('Logged in Succesfully')
-      router.push('/parent/dashboard')
+      router.push('/parent/student-attendance')
     } else {
       toast.error(result.error || 'An error occurred')
     }

@@ -18,11 +18,11 @@ import { Media, Warden } from '@/payload-types'
 
 // Menu items.
 const items = [
-  {
-    title: 'Dashboard',
-    url: '/warden/dashboard',
-    icon: LayoutDashboardIcon,
-  },
+  // {
+  //   title: 'Dashboard',
+  //   url: '/warden/dashboard',
+  //   icon: LayoutDashboardIcon,
+  // },
   {
     title: 'Attendance',
     url: '/warden/attendance',

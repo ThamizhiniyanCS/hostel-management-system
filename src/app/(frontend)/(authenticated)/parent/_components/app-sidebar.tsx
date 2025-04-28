@@ -18,11 +18,11 @@ import { Media, Parent } from '@/payload-types'
 
 // Menu items.
 const items = [
-  {
-    title: 'Dashboard',
-    url: '/parent/dashboard',
-    icon: LayoutDashboardIcon,
-  },
+  // {
+  //   title: 'Dashboard',
+  //   url: '/parent/dashboard',
+  //   icon: LayoutDashboardIcon,
+  // },
   {
     title: 'Student Attendance',
     url: '/parent/student-attendance',
