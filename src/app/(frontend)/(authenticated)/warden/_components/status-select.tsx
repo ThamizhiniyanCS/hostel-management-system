@@ -37,7 +37,7 @@ const StatusSelect = ({ status, id }: { status: TypeStatus; id: string }) => {
         setIsLoading(false)
         setCurrentStatus(value)
         toast.success('Status Updated Successfully')
-        router.push('/warden/leave-requests')
+        router.refresh()
       } else {
         toast.error(result.error || 'Failed to update status')
       }

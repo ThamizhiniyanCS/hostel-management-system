@@ -45,11 +45,13 @@ const LeaveRequestForm = () => {
   const number_of_days = form.watch('number_of_days')
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    setLoading(true)
+
     const result = await createLeaveRequestAction(values)
 
     if (result.success) {
       toast.success('Leave Request Created Successfully')
-      router.push('/parent/leave-requests')
+      router.refresh()
     } else {
       toast.error(result.error || 'An error occurred')
     }

@@ -39,7 +39,7 @@ export default buildConfig({
   plugins: [
     payloadCloudPlugin(),
     vercelBlobStorage({
-      enabled: process.env.NODE_ENV === 'production' && true, // Optional, defaults to true
+      enabled: true, // Optional, defaults to true
       // Specify which collections should use Vercel Blob
       collections: {
         media: true,

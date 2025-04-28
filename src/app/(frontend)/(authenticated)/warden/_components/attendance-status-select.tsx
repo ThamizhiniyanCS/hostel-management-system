@@ -53,7 +53,7 @@ const AttendanceStatusSelect = ({
           setIsLoading(false)
           setCurrentStatus(value)
           toast.success('Attendance Status Updated Successfully')
-          router.push('/warden/attendance')
+          router.refresh()
         } else {
           toast.error(result.error || 'Failed to attendance update status')
           setIsLoading(false)
@@ -65,7 +65,7 @@ const AttendanceStatusSelect = ({
           setIsLoading(false)
           setCurrentStatus(value)
           toast.success('Attendance Status Updated Successfully')
-          router.push('/warden/attendance')
+          router.refresh()
         } else {
           setIsLoading(false)
           toast.error(result.error || 'Failed to attendance update status')
